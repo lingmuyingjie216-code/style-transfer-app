@@ -1,4 +1,4 @@
-const API_TOKEN = process.env.REPLICATE_API_TOKEN;
+const API_TOKEN = CONFIG.API_TOKEN;
 
 const imageInput = document.getElementById('imageInput');
 const previewImg = document.getElementById('previewImg');
@@ -43,19 +43,19 @@ convertBtn.addEventListener('click', async function() {
   convertBtn.textContent = '変換中... ⏳';
   convertBtn.disabled = true;
   try {
-    const response = await fetch('https://api.replicate.com/v1/models/stability-ai/stable-diffusion/predictions', {
+    const response = await fetch('https://api.replicate.com/v1/predictions', {
       method: 'POST',
       headers: {
         'Authorization': 'Token ' + API_TOKEN,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        input: {
-          prompt: getPrompt(selectedStyle),
-          image: uploadedBase64,
-          num_inference_steps: 20
+     body: JSON.stringify({
+      version: "ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
+      input: {
+        prompt: getPrompt(selectedStyle),
+        num_inference_steps: 20
         }
-      })
+     })
     });
     const data = await response.json();
     const result = await pollResult(data.urls.get);

@@ -1,4 +1,4 @@
-const API_TOKEN = CONFIG.API_TOKEN;
+const API_TOKEN = "";
 
 const imageInput = document.getElementById('imageInput');
 const previewImg = document.getElementById('previewImg');

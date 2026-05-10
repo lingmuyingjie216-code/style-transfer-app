@@ -43,20 +43,11 @@ convertBtn.addEventListener('click', async function() {
   convertBtn.textContent = '変換中... ⏳';
   convertBtn.disabled = true;
   try {
-    const response = await fetch('https://api.replicate.com/v1/predictions', {
+    const response = await fetch('/api/convert', {
       method: 'POST',
-      headers: {
-        'Authorization': 'Token ' + API_TOKEN,
-        'Content-Type': 'application/json'
-      },
-     body: JSON.stringify({
-      version: "ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
-      input: {
-        prompt: getPrompt(selectedStyle),
-        num_inference_steps: 20
-        }
-     })
-    });
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: getPrompt(selectedStyle) })
+   });
     const data = await response.json();
     const result = await pollResult(data.urls.get);
     resultImg.src = result.output[0];
@@ -70,7 +61,11 @@ convertBtn.addEventListener('click', async function() {
 
 async function pollResult(url) {
   while (true) {
-    const res  = await fetch(url, { headers: { 'Authorization': 'Token ' + API_TOKEN } });
+    const res = await fetch(url, {
+      headers: {
+        'Authorization': 'Token ' + process.env.REPLICATE_API_TOKEN
+      }
+    });
     const data = await res.json();
     if (data.status === 'succeeded') return data;
     if (data.status === 'failed') throw new Error('変換に失敗しました');

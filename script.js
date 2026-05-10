@@ -49,6 +49,10 @@ convertBtn.addEventListener('click', async function() {
       body: JSON.stringify({ prompt: getPrompt(selectedStyle) })
    });
     const data = await response.json();
+    console.log('APIレスポンス:', data); // デバッグ用
+    if (!data.urls || !data.urls.get) {
+    throw new Error('APIエラー: ' + JSON.stringify(data));
+    }
     const result = await pollResult(data.urls.get);
     resultImg.src = result.output[0];
   } catch(e) {

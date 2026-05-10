@@ -1,4 +1,3 @@
-// api/convert.js
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -7,18 +6,19 @@ export default async function handler(req, res) {
 
   const { prompt } = req.body;
 
-  const response = await fetch('https://api.replicate.com/v1/predictions', {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Token ' + process.env.REPLICATE_API_TOKEN,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      version: "ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
-      input: { prompt: prompt, num_inference_steps: 20 }
-    })
-  });
+  const response = await fetch(
+    'https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2',
+    {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + process.env.HUGGINGFACE_API_TOKEN,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ inputs: prompt })
+    }
+  );
 
-  const data = await response.json();
-  res.status(200).json(data);
+  const buffer = await response.arrayBuffer();
+  const base64 = Buffer.from(buffer).toString('base64');
+  res.status(200).json({ image: 'data:image/jpeg;base64,' + base64 });
 }

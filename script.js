@@ -48,13 +48,11 @@ convertBtn.addEventListener('click', async function() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt: getPrompt(selectedStyle) })
    });
-    const data = await response.json();
-    console.log('APIレスポンス:', data); // デバッグ用
-    if (!data.urls || !data.urls.get) {
-    throw new Error('APIエラー: ' + JSON.stringify(data));
-    }
-    const result = await pollResult(data.urls.get);
-    resultImg.src = result.output[0];
+   const data = await response.json();
+   if (!data.image) {
+     throw new Error('APIエラー: ' + JSON.stringify(data));
+   }
+   resultImg.src = data.image;
   } catch(e) {
     alert('エラーが発生しました: ' + e.message);
   } finally {
@@ -62,17 +60,3 @@ convertBtn.addEventListener('click', async function() {
     convertBtn.disabled = false;
   }
 });
-
-async function pollResult(url) {
-  while (true) {
-    const res = await fetch(url, {
-      headers: {
-        'Authorization': 'Token ' + process.env.REPLICATE_API_TOKEN
-      }
-    });
-    const data = await res.json();
-    if (data.status === 'succeeded') return data;
-    if (data.status === 'failed') throw new Error('変換に失敗しました');
-    await new Promise(r => setTimeout(r, 2000));
-  }
-}

@@ -2,10 +2,41 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>画風変換アプリ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>画風変換アプリ</h1>
-  <p>ここに機能を追加していきます</p>
+  <div class="container">
+    <h1>🎨 画風変換アプリ</h1>
+    <p class="subtitle">画像をアップロードして画風を選ぼう</p>
+    <div class="upload-area">
+      <label for="imageInput">
+        <span>📁 画像を選択する</span>
+        <input type="file" id="imageInput" accept="image/*">
+      </label>
+    </div>
+    <div class="preview-area">
+      <div class="preview-box">
+        <p>元の画像</p>
+        <img id="previewImg" src="" alt="プレビュー">
+      </div>
+      <div class="preview-box">
+        <p>変換後の画像</p>
+        <img id="resultImg" src="" alt="結果">
+      </div>
+    </div>
+    <div class="style-select">
+      <h2>画風を選ぶ</h2>
+      <div class="style-buttons">
+        <button class="style-btn" data-style="anime">🎌 アニメ風</button>
+        <button class="style-btn" data-style="oil">🖌️ 油絵風</button>
+        <button class="style-btn" data-style="watercolor">💧 水彩画風</button>
+        <button class="style-btn" data-style="sketch">✏️ スケッチ風</button>
+      </div>
+    </div>
+    <button class="convert-btn" id="convertBtn">変換する</button>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

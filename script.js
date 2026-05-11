@@ -29,12 +29,12 @@ styleBtns.forEach(function(btn) {
 
 function getPrompt(style) {
   const map = {
-    anime:      'anime style illustration',
-    oil:        'oil painting style',
-    watercolor: 'watercolor painting style',
-    sketch:     'pencil sketch style'
+    anime:      'beautiful anime style illustration, detailed, vibrant colors, Studio Ghibli, masterpiece',
+    oil:        'oil painting style, thick brushstrokes, rich colors, impressionist, museum quality, masterpiece',
+    watercolor: 'watercolor painting style, soft colors, flowing, transparent, artistic, beautiful',
+    sketch:     'pencil sketch style, detailed linework, black and white, fine art, professional illustration'
   };
-  return map[style] || 'artistic style';
+  return map[style] || 'artistic style, masterpiece, high quality';
 }
 
 convertBtn.addEventListener('click', async function() {

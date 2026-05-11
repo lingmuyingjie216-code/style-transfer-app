@@ -53,6 +53,16 @@ convertBtn.addEventListener('click', async function() {
     throw new Error('APIエラー: ' + JSON.stringify(data));
   }
   resultImg.src = data.image;
+  // ダウンロードボタンを表示
+  const existingBtn = document.getElementById('downloadBtn');
+  if (existingBtn) existingBtn.remove();
+  const downloadBtn = document.createElement('a');
+  downloadBtn.id = 'downloadBtn';
+  downloadBtn.href = data.image;
+  downloadBtn.download = '変換画像.jpg';
+  downloadBtn.textContent = '⬇️ 画像をダウンロード';
+  downloadBtn.style.cssText = 'display:block;margin-top:12px;padding:10px;background:#1D9E75;color:white;border-radius:8px;text-align:center;text-decoration:none;font-size:14px;';
+    resultImg.parentElement.appendChild(downloadBtn);
   } catch(e) {
     alert('エラーが発生しました: ' + e.message);
   } finally {

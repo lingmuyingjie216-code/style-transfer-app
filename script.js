@@ -49,10 +49,10 @@ convertBtn.addEventListener('click', async function() {
       body: JSON.stringify({ prompt: getPrompt(selectedStyle) })
    });
    const data = await response.json();
-   if (!data.image) {
-     throw new Error('APIエラー: ' + JSON.stringify(data));
-   }
-   resultImg.src = data.image;
+  if (!data.image) {
+    throw new Error('APIエラー: ' + JSON.stringify(data));
+  }
+  resultImg.src = data.image;
   } catch(e) {
     alert('エラーが発生しました: ' + e.message);
   } finally {

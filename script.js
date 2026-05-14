@@ -40,6 +40,14 @@ function getPrompt(style) {
 convertBtn.addEventListener('click', async function() {
   if (!uploadedBase64) { alert('画像を選んでください！'); return; }
   if (!selectedStyle)  { alert('画風を選んでください！'); return; }
+
+  // CSSフィルターモード
+  if (currentMode === 'css') {
+    resultImg.src = uploadedBase64;
+    resultImg.style.filter = cssFilters[selectedStyle] || '';
+    return;
+  }
+
   convertBtn.textContent = '変換中... ⏳';
   convertBtn.disabled = true;
   try {
@@ -69,4 +77,28 @@ convertBtn.addEventListener('click', async function() {
     convertBtn.textContent = '変換する';
     convertBtn.disabled = false;
   }
+});
+
+// CSSフィルターモードの切り替え
+const modeAI = document.getElementById('modeAI');
+const modeCSS = document.getElementById('modeCSS');
+let currentMode = 'ai';
+
+const cssFilters = {
+  anime:      'saturate(150%) contrast(120%) brightness(110%)',
+  oil:        'saturate(200%) contrast(130%) brightness(90%)',
+  watercolor: 'saturate(120%) contrast(90%) brightness(110%) blur(0.5px)',
+  sketch:     'grayscale(100%) contrast(200%) brightness(120%)'
+};
+
+modeAI.addEventListener('click', function() {
+  currentMode = 'ai';
+  modeAI.classList.add('active');
+  modeCSS.classList.remove('active');
+});
+
+modeCSS.addEventListener('click', function() {
+  currentMode = 'css';
+  modeCSS.classList.add('active');
+  modeAI.classList.remove('active');
 });

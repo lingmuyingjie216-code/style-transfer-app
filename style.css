@@ -17,3 +17,6 @@ h2 { font-size: 16px; margin-bottom: 12px; }
 .style-btn.selected { border-color: #7c6fe0; background: #7c6fe0; color: white; }
 .convert-btn { width: 100%; padding: 14px; background: #7c6fe0; color: white; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; transition: background 0.2s; }
 .convert-btn:hover { background: #5a4fcf; }
+.mode-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.mode-btn { padding: 10px 20px; border: 2px solid #ddd; border-radius: 30px; background: white; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.mode-btn.active { border-color: #7c6fe0; background: #7c6fe0; color: white; }

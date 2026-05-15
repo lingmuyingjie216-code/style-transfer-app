@@ -1,22 +1,233 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: sans-serif; background: #f0f4ff; color: #333; }
-.container { max-width: 800px; margin: 40px auto; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-h1 { font-size: 28px; text-align: center; margin-bottom: 8px; }
-.subtitle { text-align: center; color: #888; margin-bottom: 24px; }
-.upload-area { border: 2px dashed #aaa; border-radius: 12px; padding: 30px; text-align: center; margin-bottom: 24px; cursor: pointer; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #050505;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 780px;
+  background: #0a0a0a;
+  border: 0.5px solid #1e1e1e;
+  border-radius: 20px;
+  padding: 36px;
+}
+
+/* ヘッダー */
+h1 {
+  font-size: 11px;
+  font-weight: 400;
+  color: #444;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h1::before { content: '✦ '; color: #7c6fe0; }
+h1::after  { content: ' ✦'; color: #7c6fe0; }
+
+.subtitle {
+  font-size: 26px;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle span { color: #7c6fe0; }
+
+.subtitle-desc {
+  font-size: 13px;
+  color: #444;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* モード切り替え */
+.mode-tabs {
+  display: flex;
+  background: #111;
+  border: 0.5px solid #222;
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 24px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 9px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  background: transparent;
+  color: #555;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.mode-btn.active {
+  background: #1a1a1a;
+  color: #fff;
+  border: 0.5px solid #333;
+}
+
+/* アップロードエリア */
+.upload-area {
+  border: 0.5px solid #1e1e1e;
+  border-radius: 14px;
+  padding: 36px;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background: #0f0f0f;
+  transition: all 0.25s;
+}
+
+.upload-area:hover {
+  border-color: #7c6fe0;
+  background: #111;
+}
+
 .upload-area input { display: none; }
-.upload-area span { font-size: 16px; color: #555; }
-.preview-area { display: flex; gap: 16px; margin-bottom: 24px; }
-.preview-box { flex: 1; border: 1px solid #ddd; border-radius: 12px; padding: 12px; text-align: center; }
-.preview-box p { margin-bottom: 8px; color: #666; font-size: 13px; }
-.preview-box img { width: 100%; max-height: 200px; object-fit: contain; border-radius: 8px; }
-h2 { font-size: 16px; margin-bottom: 12px; }
-.style-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
-.style-btn { padding: 10px 18px; border: 2px solid #ddd; border-radius: 30px; background: white; cursor: pointer; font-size: 14px; transition: all 0.2s; }
-.style-btn:hover { border-color: #7c6fe0; color: #7c6fe0; }
-.style-btn.selected { border-color: #7c6fe0; background: #7c6fe0; color: white; }
-.convert-btn { width: 100%; padding: 14px; background: #7c6fe0; color: white; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; transition: background 0.2s; }
-.convert-btn:hover { background: #5a4fcf; }
-.mode-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-.mode-btn { padding: 10px 20px; border: 2px solid #ddd; border-radius: 30px; background: white; cursor: pointer; font-size: 14px; transition: all 0.2s; }
-.mode-btn.active { border-color: #7c6fe0; background: #7c6fe0; color: white; }
+
+.upload-area span {
+  font-size: 14px;
+  color: #555;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.upload-hint {
+  font-size: 11px;
+  color: #2a2a2a;
+  letter-spacing: 1.5px;
+}
+
+/* プレビューエリア */
+.preview-area {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.preview-box {
+  background: #0f0f0f;
+  border: 0.5px solid #1e1e1e;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.preview-box p {
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.preview-box img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #111;
+}
+
+/* 矢印 */
+.arrow-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #2a2a2a;
+  transition: all 0.3s;
+}
+
+.arrow-col.converting {
+  animation: glow-pulse 0.8s ease-in-out infinite alternate;
+  color: #7c6fe0;
+}
+
+@keyframes glow-pulse {
+  from {
+    color: #7c6fe0;
+    text-shadow: 0 0 8px rgba(124,111,224,0.4);
+    transform: scale(1);
+  }
+  to {
+    color: #a89ff0;
+    text-shadow: 0 0 20px rgba(124,111,224,0.9), 0 0 40px rgba(124,111,224,0.4);
+    transform: scale(1.3);
+  }
+}
+
+/* 画風セクション */
+.style-select h2 {
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.style-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.style-btn {
+  padding: 9px 18px;
+  border: 0.5px solid #222;
+  border-radius: 8px;
+  background: #0f0f0f;
+  color: #555;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.style-btn:hover {
+  border-color: #7c6fe0;
+  color: #7c6fe0;
+}
+
+.style-btn.selected {
+  border-color: #7c6fe0;
+  background: rgba(124,111,224,0.08);
+  color: #7c6fe0;
+}
+
+/* 変換ボタン */
+.convert-btn {
+  width: 100%;
+  padding: 14px;
+  background: #7c6fe0;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+  font-family: inherit;
+}
+
+.convert-btn:hover { background: #6a5ed4; }
+.convert-btn:disabled { background: #2a2a2a; color: #444; cursor: not-allowed; }

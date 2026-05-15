@@ -49,6 +49,7 @@ convertBtn.addEventListener('click', async function() {
   }
 
   convertBtn.textContent = '変換中... ⏳';
+  document.getElementById('arrowCol').classList.add('converting');
   convertBtn.disabled = true;
   try {
     const response = await fetch('/api/convert', {
@@ -75,6 +76,7 @@ convertBtn.addEventListener('click', async function() {
     alert('エラーが発生しました: ' + e.message);
   } finally {
     convertBtn.textContent = '変換する';
+    document.getElementById('arrowCol').classList.remove('converting');
     convertBtn.disabled = false;
   }
 });
